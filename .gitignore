@@ -1,0 +1,45 @@
+# ------------------------------
+# Python & Jupyter ignores
+# ------------------------------
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+.env
+*.env
+.DS_Store
+
+# ------------------------------
+# VSCode & System files
+# ------------------------------
+.vscode/
+.idea/
+*.swp
+.venv
+
+# ------------------------------
+# Data and Vector Store (LARGE FILES)
+# ------------------------------
+data/filtered_complaints.csv
+data/*.zip
+data/*.parquet
+vector_store/
+*.faiss
+*.pkl
+*.npy
+
+# ------------------------------
+# Model files or embeddings
+# ------------------------------
+models/
+*.bin
+*.onnx
+*.pt
+*.h5
+
+# ------------------------------
+# Logs or temp files
+# ------------------------------
+*.log
+logs/
+tmp/
+
