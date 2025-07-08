@@ -1,101 +1,118 @@
-🧠 Task 3: Core RAG Implementation with Prompt Engineering
-📌 Overview
-This task implements the core Retrieval-Augmented Generation (RAG) system that answers questions using real-world customer complaint data. The system retrieves the most relevant complaint excerpts using dense embeddings and combines them with a prompt to generate human-readable answers using a text generation model.
+# 🧠 Task 3: Core RAG Implementation with Prompt Engineering
 
-🛠️ Features
+## 📌 Overview
 
-🔍 Embedding-based Retrieval using all-MiniLM-L6-v2 via sentence-transformers.
+This task implements the core **Retrieval-Augmented Generation (RAG)** system that answers questions using real-world customer complaint data. The system retrieves the most relevant complaint excerpts using dense embeddings and combines them with a prompt to generate human-readable answers using a text generation model.
 
+---
 
-🧠 Prompt Engineering to guide google/flan-t5-small in structured question answering.
+## 🛠️ Features
 
+- 🔍 **Embedding-based Retrieval** using `all-MiniLM-L6-v2` via `sentence-transformers`
+- 🧠 **Prompt Engineering** to guide `google/flan-t5-small` in structured question answering
+- 💬 **Context-aware Answer Generation** using HuggingFace Transformers
+- ✅ **Qualitative Evaluation Function** to test against multiple financial complaint queries
+- 🔒 **Robust error handling** for ChromaDB and model failures
 
-💬 Context-aware Answer Generation using HuggingFace Transformers.
+---
 
+## 📁 Folder Structure
 
-✅ Qualitative Evaluation Function to test against multiple financial complaint queries.
+```
+.
+├── task3.py                # Main RAG system logic
+├── vector_store/           # Pre-generated embeddings stored by ChromaDB
+├── requirements.txt        # Python dependencies
+```
 
+---
 
-🔒 Robust error handling for ChromaDB and model failures.
+## ⚙️ Requirements
 
+Install all dependencies:
 
-📁 Folder Structure
-graphqlCopyEdit
-
-.├── task3.py                # Main RAG system logic
-├── vector_store/           # Pre-generated embeddings stored by ChromaDB├── requirements.txt        # Python dependencies
-
-⚙️ RequirementsInstall all dependencies:
-bash
-CopyEdit
+```bash
 pip install -r requirements.txt
+```
 
-Models will be automatically downloaded from HuggingFace upon first run.
-💡 How It Works
-Query Embedding:
-The user’s question is converted to an embedding using SentenceTransformer.
+> 🧠 Note: Models will be automatically downloaded from HuggingFace on first run.
 
+---
 
-Vector Search:
-ChromaDB retrieves the most relevant complaint text chunks based on the query.
+## 💡 How It Works
 
+- **Query Embedding**  
+  The user’s question is converted to an embedding using `SentenceTransformer`.
 
-Prompt Construction:
-Retrieved chunks are inserted into a prompt that provides instructions to the LLM.
+- **Vector Search**  
+  ChromaDB retrieves the most relevant complaint text chunks based on the query.
 
+- **Prompt Construction**  
+  Retrieved chunks are inserted into a prompt that provides instructions to the LLM.
 
-Answer Generation:
-The flan-t5-small model generates an answer using the custom prompt.
+- **Answer Generation**  
+  The `flan-t5-small` model generates an answer using the custom prompt.
 
+---
 
-🧪 Evaluation
-The script includes a function evaluate_rag_system() to run a set of pre-defined financial service-related questions. Output includes:
+## 🧪 Evaluation
 
-Generated Answer
+The script includes a function `evaluate_rag_system()` to run a set of pre-defined financial service-related questions. Output includes:
 
+- ✅ Generated Answer  
+- 📚 Source Text Chunks  
+- 📝 Manual Evaluation Fields (`Quality Score`, `Comments`)
 
-Source Text Chunks
+---
 
+## ▶️ Running the Script
 
-Manual Evaluation Fields (Quality Score, Comments)
-
-
-▶️ Running the Scriptbash
-CopyEdit
+```bash
 python task3.py
+```
 
 You will see:
 
-An answer to a sample question (e.g., “Why are people unhappy with BNPL?”)
+- An answer to a sample question (e.g., “Why are people unhappy with BNPL?”)
+- The top source complaint chunks
+- An evaluation table printed in markdown format
 
+---
 
-The top source complaint chunks
+## 📌 Sample Prompt Template
 
-
-An evaluation table printed in markdown format
-
-
-📌 Sample Prompt Template
-text
-CopyEdit
+```
 You are a financial analyst assistant for CrediTrust. Your task is to answer questions about customer complaints.
-Use the following retrieved complaint excerpts to formulate your answer.If the context doesn't contain the answer, state that you don't have enough information.
+Use the following retrieved complaint excerpts to formulate your answer.
+If the context doesn't contain the answer, state that you don't have enough information.
+
 Context:
 <retrieved_text>
+
 Question: <user_question>
+
 Answer:
-📥 Output Example
-sql
-CopyEdit
+```
+
+---
+
+## 📥 Output Example
+
+```
 Question: Why are people unhappy with BNPL?
 Answer: Many users report frustration due to hidden fees and poor transparency in repayment structures.
-Source 1: ... (first document chunk)Source 2: ... (second document chunk)
 
-📎 Notes
-If ChromaDB collection is not found or corrupt, retrieval will fail gracefully.
+Source 1: ... (first document chunk)
+Source 2: ... (second document chunk)
+```
 
+---
 
-Add new questions to the evaluation_questions list to expand the test suite.
+## 📎 Notes
 
+- If ChromaDB collection is not found or corrupt, retrieval will fail gracefully.
+- Add new questions to the `evaluation_questions` list in `evaluate_rag_system()` to expand the test suite.
+- For deployment or UI integration, see **Task 4** (`app.py` and Streamlit interface).
 
-For deployment or further UI integration, see Task 4 (app.py and Streamlit interface).
+---
+
