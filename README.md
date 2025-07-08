@@ -182,6 +182,9 @@ The script includes a function `evaluate_rag_system()` to run a set of pre-defin
 
 ---
 
+![image](https://github.com/user-attachments/assets/9552c87c-346f-4aa1-a09f-8001ef2b0a12)
+
+
 ## 🧠 Overview
 
 This task implements a user-friendly **Streamlit-based interface** that allows non-technical users to interact with the **Retrieval-Augmented Generation (RAG)** system developed in Task 3. The chatbot enables users to ask questions about customer complaints and receive grounded, explainable responses.
