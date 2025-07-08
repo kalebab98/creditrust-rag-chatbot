@@ -1,34 +1,101 @@
-# 🧠 CrediTrust Complaint Insight Chatbot
+🧠 Task 3: Core RAG Implementation with Prompt Engineering
+📌 Overview
+This task implements the core Retrieval-Augmented Generation (RAG) system that answers questions using real-world customer complaint data. The system retrieves the most relevant complaint excerpts using dense embeddings and combines them with a prompt to generate human-readable answers using a text generation model.
 
-A Retrieval-Augmented Generation (RAG) chatbot built to help product, support, and compliance teams at CrediTrust Financial understand customer complaints in real-time.
+🛠️ Features
 
-This AI-powered assistant enables plain-English querying of customer complaint narratives, instantly revealing trends, issues, and insights across five major financial products.
+🔍 Embedding-based Retrieval using all-MiniLM-L6-v2 via sentence-transformers.
 
----
 
-## 📊 Business Objective
+🧠 Prompt Engineering to guide google/flan-t5-small in structured question answering.
 
-CrediTrust receives thousands of unstructured complaints every month. Internal teams struggle to extract actionable insights, often spending hours manually sifting through feedback.
 
-This tool reduces that process from **days to minutes**, enabling non-technical stakeholders to:
+💬 Context-aware Answer Generation using HuggingFace Transformers.
 
-- Identify major pain points across Credit Cards, Personal Loans, BNPL, Savings Accounts, and Money Transfers.
-- Ask natural-language questions like:
-  > "What are the top issues in BNPL this month?"
 
-- Get **evidence-backed summaries** powered by LLMs and real complaint data.
+✅ Qualitative Evaluation Function to test against multiple financial complaint queries.
 
----
 
-## ⚙️ Architecture Overview
+🔒 Robust error handling for ChromaDB and model failures.
 
-This project uses **Retrieval-Augmented Generation (RAG)**:
 
-1. **Text Preprocessing** – Clean complaint narratives and filter by product.
-2. **Text Chunking** – Break long narratives into semantic chunks.
-3. **Vector Embedding** – Use `sentence-transformers/all-MiniLM-L6-v2` for semantic encoding.
-4. **Vector Store** – Store and search using `FAISS` or `ChromaDB`.
-5. **RAG Pipeline** – Retrieve top-k relevant chunks, send to LLM with prompt.
-6. **Chat Interface** – Query the system via a user-friendly UI built with Gradio or Streamlit.
+📁 Folder Structure
+graphqlCopyEdit
 
----
+.├── task3.py                # Main RAG system logic
+├── vector_store/           # Pre-generated embeddings stored by ChromaDB├── requirements.txt        # Python dependencies
+
+⚙️ RequirementsInstall all dependencies:
+bash
+CopyEdit
+pip install -r requirements.txt
+
+Models will be automatically downloaded from HuggingFace upon first run.
+💡 How It Works
+Query Embedding:
+The user’s question is converted to an embedding using SentenceTransformer.
+
+
+Vector Search:
+ChromaDB retrieves the most relevant complaint text chunks based on the query.
+
+
+Prompt Construction:
+Retrieved chunks are inserted into a prompt that provides instructions to the LLM.
+
+
+Answer Generation:
+The flan-t5-small model generates an answer using the custom prompt.
+
+
+🧪 Evaluation
+The script includes a function evaluate_rag_system() to run a set of pre-defined financial service-related questions. Output includes:
+
+Generated Answer
+
+
+Source Text Chunks
+
+
+Manual Evaluation Fields (Quality Score, Comments)
+
+
+▶️ Running the Scriptbash
+CopyEdit
+python task3.py
+
+You will see:
+
+An answer to a sample question (e.g., “Why are people unhappy with BNPL?”)
+
+
+The top source complaint chunks
+
+
+An evaluation table printed in markdown format
+
+
+📌 Sample Prompt Template
+text
+CopyEdit
+You are a financial analyst assistant for CrediTrust. Your task is to answer questions about customer complaints.
+Use the following retrieved complaint excerpts to formulate your answer.If the context doesn't contain the answer, state that you don't have enough information.
+Context:
+<retrieved_text>
+Question: <user_question>
+Answer:
+📥 Output Example
+sql
+CopyEdit
+Question: Why are people unhappy with BNPL?
+Answer: Many users report frustration due to hidden fees and poor transparency in repayment structures.
+Source 1: ... (first document chunk)Source 2: ... (second document chunk)
+
+📎 Notes
+If ChromaDB collection is not found or corrupt, retrieval will fail gracefully.
+
+
+Add new questions to the evaluation_questions list to expand the test suite.
+
+
+For deployment or further UI integration, see Task 4 (app.py and Streamlit interface).
