@@ -176,10 +176,6 @@ The script includes a function `evaluate_rag_system()` to run a set of pre-defin
 ---
 
 # 💬 Task 4: Interactive Chat Interface for RAG System
-
-## 📌 Project Title:
-**CrediTrust Complaint Chatbot – Streamlit UI for Retrieval-Augmented Generation**
-
 ---
 
 ![image](https://github.com/user-attachments/assets/9552c87c-346f-4aa1-a09f-8001ef2b0a12)
