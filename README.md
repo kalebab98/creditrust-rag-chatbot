@@ -224,8 +224,8 @@ This task implements a user-friendly **Streamlit-based interface** that allows n
 
 ```
 .
-├── app.py                    # Streamlit chatbot app
-├── task3.py                  # Core RAG system
+├── scripts/app.py                    # Streamlit chatbot app
+├── scripts/task3.py                  # Core RAG system
 ├── vector_store/             # ChromaDB vector index
 ├── requirements.txt          # Python dependencies
 ```
